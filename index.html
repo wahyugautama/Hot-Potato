@@ -26,8 +26,32 @@
         <div class="menu__bomb" aria-hidden="true">●<i></i></div>
         <h1>HOT<br><span>POTATO</span></h1>
         <p>Pass it before it blows.</p>
-        <button id="play-button" type="button">PLAY <span>→</span></button>
-        <small>1 player vs 3 bots</small>
+        <div class="menu__actions">
+          <button id="create-button" type="button">CREATE ROOM <span>→</span></button>
+          <button id="join-button" class="secondary" type="button">JOIN ROOM</button>
+          <button id="play-button" class="practice" type="button">PRACTICE</button>
+        </div>
+        <small>2–6 ONLINE · OR 1 PLAYER VS 3 BOTS</small>
+      </section>
+      <section id="connect-screen" class="screen connect is-hidden">
+        <button id="connect-back" class="back" type="button">← BACK</button>
+        <p id="connect-kicker">ONLINE MATCH</p><h2 id="connect-title">CREATE ROOM</h2>
+        <form id="connect-form">
+          <label>YOUR NAME<input id="nickname-input" maxlength="14" autocomplete="nickname" placeholder="Player" required></label>
+          <label id="code-field" class="is-hidden">ROOM CODE<input id="room-code-input" maxlength="6" autocapitalize="characters" placeholder="ABC123"></label>
+          <button id="connect-submit" type="submit">CONTINUE</button>
+        </form>
+        <p id="connect-error" class="form-error" role="alert"></p>
+      </section>
+      <section id="lobby" class="screen lobby is-hidden">
+        <button id="lobby-back" class="back" type="button">LEAVE</button>
+        <p>ROOM CODE</p><h2 id="lobby-code">——</h2>
+        <div class="lobby__share"><button id="copy-code" type="button">COPY CODE</button><button id="share-room" type="button">SHARE</button></div>
+        <div id="connection-status" class="connection">CONNECTED</div>
+        <div id="lobby-players" class="lobby__players"></div>
+        <button id="ready-button" type="button">READY</button>
+        <button id="start-button" type="button" class="is-hidden">START MATCH</button>
+        <small id="lobby-hint">Waiting for at least 2 players…</small>
       </section>
       <section id="winner" class="screen winner is-hidden" aria-live="assertive">
         <p>LAST ONE STANDING</p>
@@ -35,6 +59,11 @@
         <button id="restart-button" type="button">PLAY AGAIN <span>↻</span></button>
       </section>
       <div id="toast" class="toast" aria-live="assertive"></div>
+      <div id="connection-warning" class="connection-warning is-hidden" role="status" aria-live="polite"></div>
+      <aside id="diagnostics" class="diagnostics is-hidden" aria-label="Development diagnostics">
+        <b>DIAGNOSTICS</b><span id="diag-fps">FPS —</span><span id="diag-latency">PING —</span>
+        <span id="diag-connection">DISCONNECTED</span><span id="diag-room">ROOM —</span><span id="diag-players">PLAYERS 0</span>
+      </aside>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

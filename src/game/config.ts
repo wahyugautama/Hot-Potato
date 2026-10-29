@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { BootScene } from './scenes/BootScene';
 import { MenuScene } from './scenes/MenuScene';
 import { GameScene } from './scenes/GameScene';
+import { MultiplayerScene } from './scenes/MultiplayerScene';
 
 export const WORLD_WIDTH = 720;
 export const WORLD_HEIGHT = 900;
@@ -34,6 +35,6 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
     arcade: { gravity: { x: 0, y: 0 }, debug: false },
   },
   scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-  scene: [BootScene, MenuScene, GameScene],
+  scene: [BootScene, MenuScene, GameScene, MultiplayerScene],
   input: { activePointers: 3 },
 };

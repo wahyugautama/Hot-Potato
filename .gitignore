@@ -1,1 +1,13 @@
 .shipstudio/
+.DS_Store
+node_modules/
+dist/
+server/dist/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+!.env.production.example
+.vercel/
+.railway/
+npm-debug.log*

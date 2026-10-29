@@ -9,6 +9,8 @@ import { HUD } from '../../ui/HUD';
 import { GAME_EVENTS, type PlayerState } from '../../types/game';
 import { getRandomArena } from '../arenas/layouts';
 import { sound } from '../systems/SoundSystem';
+import { areCirclesTouching } from '../logic/rules';
+import { PLAYER_RADIUS } from '../config';
 
 export class GameScene extends Phaser.Scene {
   private players: Player[] = [];
@@ -80,7 +82,9 @@ export class GameScene extends Phaser.Scene {
   private checkTransfers(time: number): void {
     this.players.forEach((player, index) => this.players.slice(index + 1).forEach((other) => {
       if (!player.playerState.alive || !other.playerState.alive) return;
-      const touching = this.physics.overlap(player, other);
+      // Arcade colliders resolve penetration before update(), so overlap() is
+      // normally false at the exact moment the circles visibly touch.
+      const touching = areCirclesTouching(player.x, player.y, other.x, other.y, PLAYER_RADIUS * 2);
       const pair = [player.playerState.id, other.playerState.id].sort().join(':');
       this.bomb.setContactState(pair, touching);
       if (touching) this.bomb.tryTransfer(player, other, time);

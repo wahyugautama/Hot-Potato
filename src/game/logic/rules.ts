@@ -10,3 +10,12 @@ export const isTransferEligible = (
 ): boolean => phase === 'playing' && holderAlive && recipientAlive && now >= recipientProtectedUntil && !contactConsumed;
 
 export const shouldStartNextRound = (phase: string, now: number, transitionAt: number): boolean => phase === 'intermission' && now >= transitionAt;
+
+/**
+ * Physics solvers separate two circular bodies to their exact combined radius.
+ * A small contact tolerance makes that resting contact count without allowing a
+ * visibly separated pass.
+ */
+export const areCirclesTouching = (
+  ax: number, ay: number, bx: number, by: number, combinedRadius: number, tolerance = 4,
+): boolean => Math.hypot(ax - bx, ay - by) <= combinedRadius + tolerance;

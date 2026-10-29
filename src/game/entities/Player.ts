@@ -36,7 +36,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.glow = scene.add.circle(this.x, this.y, PLAYER_RADIUS + 9).setStrokeStyle(5, 0xffd95a, 1).setDepth(3).setVisible(false);
     this.directionDot = scene.add.circle(this.x, this.y, 5, 0xffffff, 0.9).setDepth(5);
-    this.nameLabel = scene.add.text(this.x, this.y + (state.id === 'you' ? -42 : 40), state.id === 'you' ? '▼ YOU' : state.name, {
+    this.nameLabel = scene.add.text(this.x, this.y + (state.id === 'you' || state.isLocal ? -42 : 40), state.id === 'you' || state.isLocal ? '▼ YOU' : state.name, {
       fontFamily: 'Arial, sans-serif', fontSize: '17px', fontStyle: 'bold', color: '#ffffff', stroke: '#090b18', strokeThickness: 4,
     }).setOrigin(0.5).setDepth(6);
 
@@ -101,7 +101,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     const dashStretch = this.isDashing(time) ? 0.2 : 0;
     this.setScale(1 + bob * 0.008 + dashStretch, 1 - bob * 0.006 - dashStretch * 0.45);
     this.setRotation(this.isDashing(time) ? this.lastDirection.angle() : 0);
-    this.nameLabel.setPosition(this.x, this.y + (this.playerState.id === 'you' ? -42 : 40));
+    this.nameLabel.setPosition(this.x, this.y + (this.playerState.id === 'you' || this.playerState.isLocal ? -42 : 40));
     this.directionDot.setPosition(this.x + this.lastDirection.x * 17, this.y + this.lastDirection.y * 17);
     this.glow.setPosition(this.x, this.y);
     this.bombIcon.setPosition(this.x, this.y - 51 + bob);

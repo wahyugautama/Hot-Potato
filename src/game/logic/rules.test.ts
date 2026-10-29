@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { ARENA_LAYOUTS } from '../arenas/layouts.ts';
-import { isDashReady, isTransferEligible, shouldStartNextRound } from './rules.ts';
+import { areCirclesTouching, isDashReady, isTransferEligible, shouldStartNextRound } from './rules.ts';
 
 describe('dash cooldown', () => {
   it('allows a dash at or after cooldown expiry', () => {
@@ -17,6 +17,12 @@ describe('bomb transfer eligibility', () => {
     assert.equal(isTransferEligible('playing', true, true, 1001, 1000, false), false);
     assert.equal(isTransferEligible('playing', true, true, 0, 1000, true), false);
     assert.equal(isTransferEligible('playing', false, true, 0, 1000, false), false);
+  });
+
+  it('treats physics-resolved edge contact as a collision', () => {
+    assert.equal(areCirclesTouching(100, 100, 152, 100, 52), true);
+    assert.equal(areCirclesTouching(100, 100, 156, 100, 52), true);
+    assert.equal(areCirclesTouching(100, 100, 157, 100, 52), false);
   });
 });
 

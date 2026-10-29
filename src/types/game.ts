@@ -1,4 +1,4 @@
-export type PlayerId = 'you' | 'nova' | 'zip' | 'mox';
+export type PlayerId = string;
 export type BotPersonality = 'aggressive' | 'cautious' | 'unpredictable';
 
 export interface Vector2Like { x: number; y: number }
@@ -12,6 +12,7 @@ export interface PlayerState {
   hasBomb: boolean;
   protectedUntil: number;
   personality?: BotPersonality;
+  isLocal?: boolean;
 }
 
 export type MatchPhase = 'playing' | 'intermission' | 'finished';
